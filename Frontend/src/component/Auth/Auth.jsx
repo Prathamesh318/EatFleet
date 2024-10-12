@@ -26,7 +26,7 @@ const Auth = () => {
 
         <Box sx={style}>
             {
-                location.pathname==="account/register" ? <RegisterForm/>:<LoginForm/>
+                location.pathname==="/account/register" ? <RegisterForm/>:<LoginForm/>
             }
         </Box>
     </Modal>
