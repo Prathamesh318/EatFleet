@@ -7,8 +7,10 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import EventIcon from '@mui/icons-material/Event';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Drawer, useMediaQuery } from '@mui/material';
-import zIndex from '@mui/material/styles/zIndex';
+import { Divider, Drawer, useMediaQuery } from '@mui/material';
+
+import { useNavigate } from 'react-router-dom';
+// import zIndex from '@mui/material/styles/zIndex';
 const menu=[
     {
         title:"Orders",
@@ -17,7 +19,7 @@ const menu=[
 
     },
     {
-        title:"Favourites",
+         title:"Favourites",
         icon:<FavoriteIcon/>,
 
 
@@ -55,17 +57,38 @@ const menu=[
 ]
 
 const ProfileNav = ({open,handleClos}) => {
-    const isSmallScreen=useMediaQuery("(max-width:1080");
+    const isSmallScreen=useMediaQuery('(max-width:900px)');
+
+    const navigate=useNavigate();
+
+    const handleNavigate=(item)=>{
+
+        navigate(`/my-profile/${item.title.toLowerCase()}`)
+    }
 
   return (
     <div>
-        <Drawer sc={{zIndex:1}} anchor='left' open={open} onClose={handleClos} variant={isSmallScreen?"temporary":"permanent"} >
-                <div className='w-[50vw lg:w=[20vw] h-[100vh] flex flex-col justify-center text-xl gap-8 pt-16' >
+        <Drawer sx={{zIndex:-100,position:"sticky"}} anchor='left' open={isSmallScreen ? open:true} onClose={handleClos} variant={isSmallScreen?"temporary":"permanent"} >
+                <div className='w-[50vw lg:w-[20vw] h-[90vh] flex flex-col justify-center text-xl gap-8 pt-16' >
+                {
+                    menu.map((item,i)=>{
 
+                        return (
+                            <>
+                              <div key={i} className='px-5 flex items-center space-x-5 cursor-pointer' onClick={()=>handleNavigate(item)}>
+                            {item.icon}
+                            <span >{item.title}</span>
+                        </div>
+                        {i!==menu.length-1 && <Divider/>}
+                            </>
+                      
+                    )})
+                }
                 </div>
         </Drawer>
     </div>
   )
 }
+
 
 export default ProfileNav

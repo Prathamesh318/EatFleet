@@ -8,6 +8,7 @@ import './Home.css'
 import MultiItemCarousel from './MultiItemCarousel'
 // import RestaurantCarousel from '../Restaurant/RestaurantCarousel'
 import RestaurantCart from '../Restaurant/RestaurantCart'
+import Auth from '../Auth/Auth'
 // import { topmeals } from './topMeal'
 
 const restaurant=[1,1,1,1,1,1,1,1]
@@ -43,6 +44,7 @@ const Home = () => {
           }
           </div>
         </section>
+     
         
     </div>
   )
