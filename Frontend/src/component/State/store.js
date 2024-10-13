@@ -3,10 +3,12 @@ import { authReducer } from "./Authentication/Reducer";
 
 import {thunk} from "redux-thunk"
 import restaurantReducer from "./Restaurant/Reducer";
+import menuItemsReducer from "./Menu/Reducer";
 const rootReducer=combineReducers(
     {
         auth:authReducer,
-        restaurant:restaurantReducer
+        restaurant:restaurantReducer,
+        menu:menuItemsReducer
 
     }
 )
