@@ -6,6 +6,7 @@ import RestaurantDetails from '../component/Restaurant/RestaurantDetails'
 import Cart from '../component/Cart/Cart'
 import Profile from '../component/Profile/Profile'
 import Auth from '../component/Auth/Auth'
+import LoginForm from '../component/Auth/LoginForm'
 
 const CustomerRoutes = () => {
   return (
@@ -17,6 +18,7 @@ const CustomerRoutes = () => {
             <Route path='/restaurant/:city/:title/:id' element={<RestaurantDetails/>}/>
             <Route path='/cart' element={<Cart/>}/>
             <Route path='/my-profile/*' element={<Profile/>}/>
+            {/* <Route path='/login'  element={<LoginForm/>}/> */}
             
         </Routes>
         <Auth/>

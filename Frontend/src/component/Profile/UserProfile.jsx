@@ -1,14 +1,17 @@
 import React from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Button } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { logout } from '../State/Authentication/Action';
+import { useNavigate } from 'react-router-dom';
 
 const UserProfile = () => {
+
+    const dispatch=useDispatch();
+    const navigate=useNavigate();
     const handleLogout = () => {
-        // Logic to log the user out
-        console.log('Logging out...');
-        // For example, clearing session storage or token, redirecting to login
-        sessionStorage.clear(); // Or use localStorage.clear();
-        window.location.href = '/login'; // Redirect to login page
+        dispatch(logout());
+        navigate("/")
     };
 
     return (

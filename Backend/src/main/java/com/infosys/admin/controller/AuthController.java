@@ -74,7 +74,7 @@ public class AuthController {
 		authResponse.setJwt(jwt);
 		authResponse.setRole(savedUser.getRole());
 		
-		
+		System.out.println(user);
 		
 		return new ResponseEntity<>(authResponse,HttpStatus.CREATED);
 		

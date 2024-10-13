@@ -2,6 +2,8 @@ import React from 'react';
 import {  Formik, Form, Field,  } from 'formik';
 import { Button, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../State/Authentication/Action';
 
 const LoginForm = () => {
 
@@ -11,9 +13,10 @@ const LoginForm = () => {
     password: '',
   };
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    // Handle form submission here (e.g., send data to server)
-    setSubmitting(false);
+  const dispatch = useDispatch();
+
+  const handleSubmit = (values) => {
+    dispatch(loginUser({userData:values,navigate}))
   };
 
   return (
