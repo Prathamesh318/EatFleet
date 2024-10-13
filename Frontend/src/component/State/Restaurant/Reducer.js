@@ -1,4 +1,4 @@
-import * as actionTypes from "./ActionTypes";
+import * as actionTypes from "./ActionType";
 
 const initialState = {
   restaurants: [],
@@ -37,7 +37,7 @@ case actionTypes.GET_ALL_RESTAURANTS_SUCCESS:
     loading: false,
     restaurants: action.payload,
   };
-  case actionTypes.GET_RESTAURANTS_BY_ID_SUCCESS:
+  case actionTypes.GET_RESTAURANT_BY_ID_SUCCESS:
   return {
     ...state,
     loading: false,
