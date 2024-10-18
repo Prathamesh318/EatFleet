@@ -10,6 +10,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -25,6 +26,7 @@ public class IngredientsItem {
 		
 		
 		@ManyToOne
+		@ToString.Exclude
 		private	IngredientCategory category;
 		
 		

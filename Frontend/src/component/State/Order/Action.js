@@ -1,13 +1,13 @@
 import { api } from "../../Config/api";
 import { CREATE_ORDER_FAILURE, CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, GET_USERS_ORDERS_FAILURE, GET_USERS_ORDERS_REQUEST, GET_USERS_ORDERS_SUCCESS } from "./ActionType";
 
-export const createOrder = (reqData) => {
+export const createOrder = ({order,jwt}) => {
     return async (dispatch) => {
       dispatch({ type: CREATE_ORDER_REQUEST });
       try {
-        const { data } = await api.post('/api/order', reqData.order, {
+        const { data } = await api.post('/api/order', order, {
           headers: {
-            Authorization: `Bearer ${reqData.jwt}`,
+            Authorization: `Bearer ${jwt}`,
           },
         });
         // if (data.payment_url) {

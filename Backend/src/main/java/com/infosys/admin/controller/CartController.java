@@ -49,6 +49,7 @@ public class CartController {
 			)throws Exception{
 		
 		
+		System.out.println("Cart is"+req.getId());
 		CartItem cartItem=cartService.updateCartItemQuantity(req.getId(), req.getQuantity());
 		
 		return new ResponseEntity<CartItem>(cartItem,HttpStatus.CREATED);

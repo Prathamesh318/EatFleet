@@ -254,23 +254,22 @@ export const getRestaurantById = (reqData) => {
     };
   };
 
-  export const getRestaurantsCategory= ({jwt,restaurantId}) => {
+  export const getRestaurantsCategory= ({jwt, restaurantId}) => {
     return async (dispatch) => {
-      dispatch({type:GET_RESTAURANTS_CATEGORY_REQUEST});
+      dispatch({ type: GET_RESTAURANTS_CATEGORY_REQUEST });
       try {
-        const {data} = await api.get(`/api/category/restaurants/${restaurantId}`, {
+        const { data } = await api.get(`/api/admin/category/restaurant/${restaurantId}`, {
           headers: {
-            Authorization: `Bearer ${jwt}`,
+            Authorization: `Bearer ${jwt}`,  // Ensure the token is correctly passed here
           },
         });
-
-        console.log("Creating event"+data);
-        dispatch({type:GET_RESTAURANTS_CATEGORY_SUCCESS,payload:data});
-
-        
+  
+        console.log("Getting category" + JSON.stringify(data));
+        dispatch({ type: GET_RESTAURANTS_CATEGORY_SUCCESS, payload: data });
       } catch (error) {
-        console.log('error', error);
-        dispatch({type:GET_RESTAURANTS_CATEGORY_FAILURE,payload:error});
+        console.log('error', error);  // Logs the error to better understand it
+        dispatch({ type: GET_RESTAURANTS_CATEGORY_FAILURE, payload: error });
       }
     };
   };
+  

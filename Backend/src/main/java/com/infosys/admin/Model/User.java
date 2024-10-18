@@ -18,6 +18,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -40,6 +41,7 @@ public class User {
 	private USER_ROLE role=USER_ROLE.ROLE_CUSTOMER;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
 	@JsonIgnore
+	@ToString.Exclude
 	private List<Order> orders=new ArrayList<>();
 	
 	@ElementCollection

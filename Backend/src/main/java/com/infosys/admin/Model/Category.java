@@ -10,6 +10,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
 @Entity
@@ -28,5 +29,6 @@ public class Category {
 	
 	@ManyToOne
 	@JsonIgnore
+	@ToString.Exclude
 	private Restaurant restaurant;
 }

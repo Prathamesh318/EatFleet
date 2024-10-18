@@ -1,4 +1,4 @@
-import { GET_USERS_NOTIFICATION_SUCCESS, GET_USERS_ORDERS_FAILURE, GET_USERS_ORDERS_REQUEST, GET_USERS_ORDERS_SUCCESS } from "./ActionType";
+import { CREATE_ORDER_SUCCESS, GET_USERS_NOTIFICATION_SUCCESS, GET_USERS_ORDERS_FAILURE, GET_USERS_ORDERS_REQUEST, GET_USERS_ORDERS_SUCCESS } from "./ActionType";
 
 const initialState = {
     loading: false,
@@ -22,6 +22,11 @@ const initialState = {
     //     };
       case GET_USERS_ORDERS_FAILURE:
         return { ...state, error: payload, loading: false };
+
+      case CREATE_ORDER_SUCCESS:
+        return {...state,orders:payload}
+
+    
       default:
         return state;
     }

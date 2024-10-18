@@ -20,6 +20,7 @@ import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -48,6 +49,8 @@ public class Restaurant {
 	
 	private String openinghours;
 	
+	@JsonIgnore
+	@ToString.Exclude
 	@OneToMany(mappedBy = "restaurant",cascade=CascadeType.ALL,orphanRemoval = true)
 	private List<Order> orders=new ArrayList<>();
 	
@@ -62,6 +65,7 @@ public class Restaurant {
 	@OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL)
 	
 	@JsonIgnore
+	@ToString.Exclude()
 	private List<Food> foods=new ArrayList<>();
 	
 	

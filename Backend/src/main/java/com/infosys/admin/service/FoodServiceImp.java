@@ -1,7 +1,10 @@
 package com.infosys.admin.service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.zip.ZipEntry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +35,7 @@ public class FoodServiceImp implements FoodService {
 		food.setIngredients(req.getItems());
 		food.setSeasonal(req.isSeasonal());
 		food.setVeg(req.isVegeterian());
+		food.setCreationDate(new Date());
 		Food savedFood= foodRepo.save(food);
 		
 		res.getFoods().add(savedFood);
@@ -52,10 +56,21 @@ public class FoodServiceImp implements FoodService {
 	}
 
 	@Override
-	public List<Food> getrestaurantsFood(Long restaurantId, boolean isVeg, boolean isNonveg, boolean isSeasonal,
-			String category) {
+	public List<Food> getrestaurantsFood(Long restaurantId, boolean isVeg,boolean isNonveg, boolean isSeasonal
+			,Long id
+			) {
+		
+		System.out.println("Called in function");
+//		System.out.println("--"+category);
+		List<Food> food=new ArrayList<Food>();
 
-		List<Food> food=foodRepo.findByRestaurantId(restaurantId);
+		try {food =foodRepo.findByRestaurantId(restaurantId);
+		
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		if(isVeg) {
 			food=filterByVegeterian(food,isVeg);
 		}
@@ -66,8 +81,8 @@ public class FoodServiceImp implements FoodService {
 			food=filterBySeasonal(food,isSeasonal);
 			
 		}
-		if(category!=null && !category.equals("")) {
-			food=filterByCategory(food,category);
+		if(id>0) {
+			food=filterByCategory(food,id);
 			
 		}
 		
@@ -75,11 +90,11 @@ public class FoodServiceImp implements FoodService {
 		return food;
 	}
 
-	private List<Food> filterByCategory(List<Food> foods, String category) {
+	private List<Food> filterByCategory(List<Food> foods, Long categoryId) {
 		// TODO Auto-generated method stub
 		 return foods.stream().filter(food->{
 			if(food.getFoodCategory()!=null) {
-				return food.getFoodCategory().getName().equals(category);
+				return food.getFoodCategory().getId().equals(categoryId);
 			}
 			return false;
 		}).collect(Collectors.toList());

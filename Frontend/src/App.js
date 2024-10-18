@@ -17,13 +17,18 @@ import CustomerRoutes from './Routes/CustomerRoutes';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsesr } from './component/State/Authentication/Action';
+import { findCart, getAllCartItems } from './component/State/Cart/Action';
 
 function App() {
   const dispatch=useDispatch();
   const jwt=localStorage.getItem("jwt");
   const {auth}=useSelector(store=>store);
+  const {cart}=useSelector(store=>store)
   useEffect(()=>{
     dispatch(getUsesr(auth.jwt || jwt))
+    dispatch(findCart(jwt));
+    // dispatch(getAllCartItems({jwt:auth.jwt||jwt,da}))
+
   },[auth.jwt])
   return (
     <ThemeProvider theme={darkTheme}>

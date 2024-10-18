@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -15,6 +17,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
 @Entity
@@ -41,6 +44,8 @@ public class Food {
 	private boolean available;
 	
 	@ManyToOne
+//	@JsonIgnore
+	@ToString.Exclude 
 	private Restaurant restaurant;
 	
 	private boolean isVeg;

@@ -1,6 +1,6 @@
-import axios from "axios"
+// import axios from "axios"
 
-import { api, API_URL } from "../../Config/api"
+import { api } from "../../Config/api"
 import { CREATE_MENU_ITEM_FAILURE, CREATE_MENU_ITEM_REQUEST, CREATE_MENU_ITEM_SUCCESS, DELETE_MENU_ITEM_FAILURE, DELETE_MENU_ITEM_REQUEST, DELETE_MENU_ITEM_SUCCESS, GET_MENU_ITEMS_BY_RESTAURANT_ID_FAILURE, GET_MENU_ITEMS_BY_RESTAURANT_ID_REQUEST, GET_MENU_ITEMS_BY_RESTAURANT_ID_SUCCESS, SEARCH_MENU_ITEM_FAILURE, SEARCH_MENU_ITEM_REQUEST, SEARCH_MENU_ITEM_SUCCESS, UPDATE_MENU_ITEMS_AVAILABILITY_FAILURE, UPDATE_MENU_ITEMS_AVAILABILITY_REQUEST, UPDATE_MENU_ITEMS_AVAILABILITY_SUCCESS } from "./ActionType";
 
 
@@ -8,7 +8,7 @@ export const createMenuItem=({menu,jwt})=>async(dispatch)=>{
     dispatch({type:CREATE_MENU_ITEM_REQUEST})
     try {
         
-        const {data}=await axios.post(`api/admin/food`,menu,{
+        const {data}=await api.post(`api/admin/food`,menu,{
             headers:{
                 Authorization:`Bearer ${jwt}`
             }
@@ -24,24 +24,50 @@ export const createMenuItem=({menu,jwt})=>async(dispatch)=>{
 }
 
 export const getMenuItemsByRestaurantId = (reqData) => {
-    return async (dispatch) => {
-      dispatch({type:GET_MENU_ITEMS_BY_RESTAURANT_ID_REQUEST});
+  return async (dispatch) => {
+      dispatch({ type: GET_MENU_ITEMS_BY_RESTAURANT_ID_REQUEST });
       try {
-        const { data } = await api.get(
-          `/api/food/restaurant/${reqData.restaurantId}?vegetarian=${reqData.vegetarian}&seasonal=${reqData.seasonal}&food_category=${reqData.foodCategory}`,
-          {
-            headers: {
-              Authorization: `Bearer ${reqData.jwt}`,
-            },
-          }
-        );
-        console.log('menu item by restaurants', data);
-        dispatch({type:GET_MENU_ITEMS_BY_RESTAURANT_ID_SUCCESS, payload:data});
+          alert(reqData.restaurantid);
+          // console.log(reqData.jwt);
+          // console.log("Category is:"+reqData.category);
+          console.log(JSON.stringify(reqData));
+          const { data } = await api.get(
+              `/api/food/restaurant/${reqData.restaurantid}?vegeterian=${reqData.vegeterian}&nonveg=${reqData.nonveg}&seasonal=${reqData.seasonal}&category=${reqData.category}`,
+              {
+                  headers: {
+                      Authorization: `Bearer ${reqData.jwt}`,
+                  },
+              }
+          );
+
+          console.log('Menu items by restaurant:', data);
+          dispatch({ type: GET_MENU_ITEMS_BY_RESTAURANT_ID_SUCCESS, payload: data });
       } catch (error) {
-        dispatch({type:GET_MENU_ITEMS_BY_RESTAURANT_ID_FAILURE,payload:error});
+          // Check if error.response is defined
+          if (error.response) {
+              console.log("Error in getting menu items:");
+              console.log("Response data:", error.response.data); // log the response data
+              console.log("Status code:", error.response.status); // log the status code
+              console.log("Headers:", error.response.headers); // log the headers
+
+              // Handle redirect
+              if (error.response.status === 302) {
+                  console.log("Redirect detected. Status code:", error.response.status);
+                  console.log("Redirect location:", error.response.headers['location']);
+              }
+          } else if (error.request) {
+              // The request was made but no response was received
+              console.log("No response received:", error.request);
+          } else {
+              // Something happened in setting up the request that triggered an Error
+              console.log("Error message:", error.message);
+          }
+          dispatch({ type: GET_MENU_ITEMS_BY_RESTAURANT_ID_SUCCESS, payload: error.response.data });
       }
-    };
   };
+};
+
+
 
   export const searchMenuItem = ({ keyword, jwt }) => {
     return async (dispatch) => {

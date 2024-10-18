@@ -28,7 +28,7 @@ public class IngredientController {
 	
 	
 	
-	@PostMapping("category")
+	@PostMapping("/category")
 	public ResponseEntity<IngredientCategory> createIngredientCategory(@RequestBody IngredientCategoryRequest req)throws Exception{
 		
 		IngredientCategory item=ingredientservice.createIngredientCategory(req.getName(), req.getRestaurantid());

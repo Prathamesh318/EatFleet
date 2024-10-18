@@ -9,7 +9,7 @@ export const registerUser=(reqData)=>async(dispatch)=>{
         
         const {data}=await axios.post(`${API_URL}/auth/signup`,reqData.userData);
 
-        if(data.jwt)sessionStorage.setItem("jwt",data.jwt);
+        if(data.jwt)localStorage.setItem("jwt",data.jwt);
         if(data.role==="ROLE_RESTAURANT_OWNER"){
             reqData.navigate("/admin/restaurant");
         }
@@ -30,6 +30,7 @@ export const loginUser=(reqData)=>async(dispatch)=>{
     try {
         
         const {data}=await axios.post(`${API_URL}/auth/signin`,reqData.userData);
+        console.log(JSON.stringify(data));
 
         if(data.jwt)localStorage.setItem("jwt",data.jwt);
         if(data.role==="ROLE_RESTAURANT_OWNER"){
@@ -91,7 +92,7 @@ export const logout=()=>async(dispatch)=>{
         
         dispatch({type:LOGOUT})
         console.log("Logout Succcesfull");
-        sessionStorage.clear();
+        localStorage.clear();
     } catch (error) {
         
         

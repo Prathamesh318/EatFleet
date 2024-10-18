@@ -6,11 +6,12 @@ export const findCart = (token) => {
     return async (dispatch) => {
       dispatch({type:FIND_CART_REQUEST});
       try {
-        const response = await api.get('/api/cart/', {
+        const response = await api.get('/api/cart', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
+        // alert(JSON.stringify(response));
         dispatch({type:FIND_CART_SUCCESS,payload:response.data});
       } catch (error) {
         dispatch({type:FIND_CART_FAILURE,payload:error});
@@ -35,7 +36,8 @@ export const findCart = (token) => {
   };
 
 
-  export const add = (reqData) => {
+  export const addItemtoCart = (reqData) => {
+    alert("called")
     return async (dispatch) => {
       dispatch({ type: ADD_ITEM_TO_CART_REQUEST });
       try {
@@ -54,13 +56,13 @@ export const findCart = (token) => {
     };
   };
 
-  export const updateCartItem = (reqData) => {
+  export const updateCartItem = ({dataa,jwt}) => {
     return async (dispatch) => {
       dispatch({ type: UPDATE_CARTITEM_REQUEST });
       try {
-        const { data } = await api.put('/api/cart-item/update', reqData.data, {
+        const { data } = await api.put('/api/cart-item/update', dataa, {
           headers: {
-            Authorization: `Bearer ${reqData.jwt}`,
+            Authorization: `Bearer ${jwt}`,
           },
         });
         console.log('update cartItem', data);

@@ -16,7 +16,8 @@ public interface FoodService {
 				,boolean isVeg
 				,boolean isNonveg
 				,boolean isSeasonal
-				,String category);
+				,Long id
+				);
 	
 	public List<Food> searchFood(String keyword);
 	

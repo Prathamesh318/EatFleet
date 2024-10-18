@@ -41,8 +41,12 @@ public class AdminFoodController {
 			) throws Exception{
 		
 		User user=userService.findUserByJwtToken(jwt);
+		System.out.println("Category Created----------");
+		
+		System.out.println("Inngredients are"+req.getItems());
 		
 		Restaurant restaurant=restoService.findRestaurantById(req.getRestaurantId());
+		System.out.println(restaurant.toString());
 		
 		Food food=foodService.createFood(req, req.getCategory(), restaurant);
 		

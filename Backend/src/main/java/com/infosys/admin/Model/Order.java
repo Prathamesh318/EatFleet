@@ -15,6 +15,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -29,10 +30,12 @@ public class Order {
 	private Long id;
 	
 	@ManyToOne
+	@ToString.Exclude
 	private User customer;
 	
 	@JsonIgnore
 	@ManyToOne
+	@ToString.Exclude
 	private Restaurant restaurant;
 	
 	
