@@ -1,7 +1,6 @@
-// import axios from "axios"
 
 import { api } from "../../Config/api"
-import { CREATE_MENU_ITEM_FAILURE, CREATE_MENU_ITEM_REQUEST, CREATE_MENU_ITEM_SUCCESS, DELETE_MENU_ITEM_FAILURE, DELETE_MENU_ITEM_REQUEST, DELETE_MENU_ITEM_SUCCESS, GET_MENU_ITEMS_BY_RESTAURANT_ID_FAILURE, GET_MENU_ITEMS_BY_RESTAURANT_ID_REQUEST, GET_MENU_ITEMS_BY_RESTAURANT_ID_SUCCESS, SEARCH_MENU_ITEM_FAILURE, SEARCH_MENU_ITEM_REQUEST, SEARCH_MENU_ITEM_SUCCESS, UPDATE_MENU_ITEMS_AVAILABILITY_FAILURE, UPDATE_MENU_ITEMS_AVAILABILITY_REQUEST, UPDATE_MENU_ITEMS_AVAILABILITY_SUCCESS } from "./ActionType";
+import { CREATE_MENU_ITEM_FAILURE, CREATE_MENU_ITEM_REQUEST, CREATE_MENU_ITEM_SUCCESS, DELETE_MENU_ITEM_FAILURE, DELETE_MENU_ITEM_REQUEST, DELETE_MENU_ITEM_SUCCESS,  GET_MENU_ITEMS_BY_RESTAURANT_ID_REQUEST, GET_MENU_ITEMS_BY_RESTAURANT_ID_SUCCESS, SEARCH_MENU_ITEM_FAILURE, SEARCH_MENU_ITEM_REQUEST, SEARCH_MENU_ITEM_SUCCESS, UPDATE_MENU_ITEMS_AVAILABILITY_FAILURE, UPDATE_MENU_ITEMS_AVAILABILITY_REQUEST, UPDATE_MENU_ITEMS_AVAILABILITY_SUCCESS } from "./ActionType";
 
 
 export const createMenuItem=({menu,jwt})=>async(dispatch)=>{
@@ -27,10 +26,6 @@ export const getMenuItemsByRestaurantId = (reqData) => {
   return async (dispatch) => {
       dispatch({ type: GET_MENU_ITEMS_BY_RESTAURANT_ID_REQUEST });
       try {
-          alert(reqData.restaurantid);
-          // console.log(reqData.jwt);
-          // console.log("Category is:"+reqData.category);
-          console.log(JSON.stringify(reqData));
           const { data } = await api.get(
               `/api/food/restaurant/${reqData.restaurantid}?vegeterian=${reqData.vegeterian}&nonveg=${reqData.nonveg}&seasonal=${reqData.seasonal}&category=${reqData.category}`,
               {
@@ -40,7 +35,7 @@ export const getMenuItemsByRestaurantId = (reqData) => {
               }
           );
 
-          console.log('Menu items by restaurant:', data);
+          console.log('From Restaurant State : Menu items by restaurant:', data);
           dispatch({ type: GET_MENU_ITEMS_BY_RESTAURANT_ID_SUCCESS, payload: data });
       } catch (error) {
           // Check if error.response is defined
@@ -78,7 +73,7 @@ export const getMenuItemsByRestaurantId = (reqData) => {
             Authorization: `Bearer ${jwt}`,
           },
         });
-        console.log('data', data);
+        console.log('From Menu State: Menu Items', data);
         dispatch({ type: SEARCH_MENU_ITEM_SUCCESS, payload: data });
       } catch (error) {
         dispatch({ type: SEARCH_MENU_ITEM_FAILURE ,payload:error});
@@ -96,7 +91,7 @@ export const getMenuItemsByRestaurantId = (reqData) => {
             Authorization: `Bearer ${jwt}`,
           },
         });
-        console.log('update menuItems Availability', data);
+        console.log('From Menu State :Updated menuItems Availability', data);
         dispatch({ type: UPDATE_MENU_ITEMS_AVAILABILITY_SUCCESS, payload: data });
       } catch (error) {
         console.log('error', error);
@@ -114,7 +109,7 @@ export const getMenuItemsByRestaurantId = (reqData) => {
             Authorization: `Bearer ${jwt}`,
           },
         });
-        console.log('delete food', data);
+        console.log('From Menu State: Deleted food', data);
         dispatch({ type: DELETE_MENU_ITEM_SUCCESS, payload: foodId });
       } catch (error) {
         dispatch({ type: DELETE_MENU_ITEM_FAILURE, payload: error });

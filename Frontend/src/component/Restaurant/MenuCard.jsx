@@ -8,7 +8,7 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { Button } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addItemtoCart } from "../State/Cart/Action";
 
 export const categoriseIngredients = (ingredients) => {
@@ -17,51 +17,44 @@ export const categoriseIngredients = (ingredients) => {
     if (!acc[category.name]) {
       acc[category.name] = [];
     }
-    acc[category.name].push(ingredient.name); // Store only the ingredient name
+    acc[category.name].push(ingredient.name);
     return acc;
   }, {});
 };
 
-const MenuCard = ({ menu }) => { // Destructure menu from props
+const MenuCard = ({ menu }) => {
 
 
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
-  // const {menu}=useSelector(store=>store);
-
-  const[selectedIngredients,setSelectedIngredients]=useState([]);
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
 
   const categorizedIngredients = Array.isArray(menu.ingredients)
-  ? categoriseIngredients(menu.ingredients)
-  : {}; 
+    ? categoriseIngredients(menu.ingredients)
+    : {};
 
-  // console.log("Modified Categories"+JSON.stringify(categorizedIngredients));
-
-  const handleAddItemToCart=(e)=>{
-    // e.preventDefault();
-    const reqData={
-      token:localStorage.getItem("jwt"),
-      cartItem:{
-          foodId:menu.id,
-          quantity:1,
-          ingredients:selectedIngredients
+  const handleAddItemToCart = (e) => {
+    const reqData = {
+      token: localStorage.getItem("jwt"),
+      cartItem: {
+        foodId: menu.id,
+        quantity: 1,
+        ingredients: selectedIngredients
       }
     }
     dispatch(addItemtoCart(reqData));
-    // alert("----------------------Requested data------------------------"+JSON.stringify(reqData));
-
   }
-  const handleSubmit=(e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault();
   }
 
-  const handleCheckBoxChange=(itemName)=>{
+  const handleCheckBoxChange = (itemName) => {
     // alert(itemName);
-    if(selectedIngredients.includes(itemName)){
-      setSelectedIngredients(selectedIngredients.filter((item)=>item!==itemName))
+    if (selectedIngredients.includes(itemName)) {
+      setSelectedIngredients(selectedIngredients.filter((item) => item !== itemName))
     }
-    else{
-setSelectedIngredients([...selectedIngredients,itemName])
+    else {
+      setSelectedIngredients([...selectedIngredients, itemName])
     }
   }
 
@@ -93,7 +86,7 @@ setSelectedIngredients([...selectedIngredients,itemName])
         </AccordionSummary>
         <AccordionDetails>
           <form onSubmit={handleSubmit}>
-          <div className="flex gap-5 flex-wrap">
+            <div className="flex gap-5 flex-wrap">
               {Object.keys(categorizedIngredients).map((category) => (
                 <div key={category}>
                   <p className="font-semibold">{category}</p>

@@ -1,3 +1,4 @@
+import { dark } from "@mui/material/styles/createPalette";
 import { api } from "../../Config/api";
 import { ADD_ITEM_TO_CART_FAILURE, ADD_ITEM_TO_CART_REQUEST, ADD_ITEM_TO_CART_SUCCESS, CLEARE_CART_FAILURE, CLEARE_CART_REQUEST, CLEARE_CART_SUCCESS, FIND_CART_FAILURE, FIND_CART_REQUEST, FIND_CART_SUCCESS, GET_ALL_CART_ITEMS_FAILURE, GET_ALL_CART_ITEMS_REQUEST, GET_ALL_CART_ITEMS_SUCCESS, REMOVE_CARTITEM_FAILURE, REMOVE_CARTITEM_REQUEST,  REMOVE_CARTITEM_SUCCESS, UPDATE_CARTITEM_FAILURE, UPDATE_CARTITEM_REQUEST, UPDATE_CARTITEM_SUCCESS } from "./ActionType";
 
@@ -11,10 +12,11 @@ export const findCart = (token) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        // alert(JSON.stringify(response));
+        console.log("From Cart : Retrieved Cart",response);
         dispatch({type:FIND_CART_SUCCESS,payload:response.data});
       } catch (error) {
         dispatch({type:FIND_CART_FAILURE,payload:error});
+        console.log("From Cart State: Error",error);
       }
     };
   };
@@ -29,8 +31,10 @@ export const findCart = (token) => {
           },
         });
         dispatch({type:GET_ALL_CART_ITEMS_SUCCESS,payload:response.data});
+        console.log("From Cart State : Retrieved Cart Items",response);
       } catch (error) {
         dispatch({type:GET_ALL_CART_ITEMS_FAILURE,payload:error});
+        console.log("From Cart State: Error",error);
       }
     };
   };
@@ -46,7 +50,7 @@ export const findCart = (token) => {
             Authorization: `Bearer ${reqData.token}`,
           },
         });
-        console.log('add item to cart', data);
+        console.log('From Cart State :Added item to cart', data);
         dispatch({ type: ADD_ITEM_TO_CART_SUCCESS, payload: data });
 
       } catch (error) {
@@ -65,7 +69,7 @@ export const findCart = (token) => {
             Authorization: `Bearer ${jwt}`,
           },
         });
-        console.log('update cartItem', data);
+        console.log('From Cart State :Updated cartItem', data);
         dispatch({ type: UPDATE_CARTITEM_SUCCESS, payload: data });
       } catch (error) {
         console.log('catch error ', error);
@@ -83,7 +87,7 @@ export const findCart = (token) => {
             Authorization: `Bearer ${jwt}`,
           },
         });
-        console.log('remove cartItem', data);
+        console.log('From Cart State:Removed cartItem', data);
         dispatch({ type: REMOVE_CARTITEM_SUCCESS, payload: cartItemId });
       } catch (error) {
         console.log('catch error', error);

@@ -36,8 +36,6 @@ import {
     const { id, city } = useParams();
   
     const [selectedCategory, setSelectedCategory] = useState(0);
-    const [isVeg,setIsVeg]=useState(true);
-  
     const jwt = localStorage.getItem("jwt");
   
     const handleSelectedCategory = (e) => {
@@ -49,14 +47,10 @@ import {
         setFoodType(e.target.value);
     }
 
-    const handleVeg=(e)=>{
-
-    }
-  
     useEffect(() => {
       dispatch(getRestaurantById({ jwt, restaurantId: id }));
       dispatch(getRestaurantsCategory({ jwt, restaurantId: id }));
-    }, [dispatch,id]);
+    }, [dispatch,id,jwt]);
   
     useEffect(() => {
       dispatch(
@@ -69,7 +63,7 @@ import {
           category: selectedCategory,
         })
       );
-    }, [selectedCategory,foodType]);
+    }, [selectedCategory,foodType,id,jwt,dispatch]);
   
     return (
       <div className="px-5 lg:px-20 ">
@@ -83,7 +77,7 @@ import {
                 <Grid item xs={12} lg={6} key={index}>
                   <img
                     src={image}
-                    alt={`Restaurant Image ${index + 1}`}
+                    alt={`Restaurant Imag`}
                     className="w-full h-[40vh] object-cover"
                   />
                 </Grid>

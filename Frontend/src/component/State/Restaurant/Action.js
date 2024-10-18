@@ -2,8 +2,6 @@ import { api } from "../../Config/api";
 import { CREATE_CATEGORY_FAILURE, CREATE_CATEGORY_REQUEST, CREATE_CATEGORY_SUCCESS, CREATE_EVENTS_FAILURE, CREATE_EVENTS_REQUEST, CREATE_EVENTS_SUCCESS, CREATE_RESTAURANT_FAILURE, CREATE_RESTAURANT_REQUEST, CREATE_RESTAURANT_SUCCESS, DELETE_EVENTS_REQUEST, DELETE_EVENTS_SUCCESS, DELETE_RESTAURANT_FAILURE, DELETE_RESTAURANT_REQUEST, DELETE_RESTAURANT_SUCCESS, GET_ALL_EVENTS_FAILURE, GET_ALL_EVENTS_REQUEST, GET_ALL_EVENTS_SUCCESS, GET_ALL_RESTAURANTS_FAILURE, GET_ALL_RESTAURANTS_REQUEST, GET_ALL_RESTAURANTS_SUCCESS, GET_RESTAURANT_BY_ID_FAILURE, GET_RESTAURANT_BY_ID_REQUEST, GET_RESTAURANT_BY_ID_SUCCESS, GET_RESTAURANT_BY_USER_ID_FAILURE, GET_RESTAURANT_BY_USER_ID_REQUEST, GET_RESTAURANT_BY_USER_ID_SUCCESS, GET_RESTAURANTS_CATEGORY_FAILURE, GET_RESTAURANTS_CATEGORY_REQUEST, GET_RESTAURANTS_CATEGORY_SUCCESS, GET_RESTAURANTS_EVENTS_FAILURE, GET_RESTAURANTS_EVENTS_REQUEST, GET_RESTAURANTS_EVENTS_SUCCESS, UPDATE_RESTAURANT_FAILURE, UPDATE_RESTAURANT_REQUEST, UPDATE_RESTAURANT_STATUS_FAILURE, UPDATE_RESTAURANT_STATUS_REQUEST, UPDATE_RESTAURANT_STATUS_SUCCESS, UPDATE_RESTAURANT_SUCCESS } from "./ActionType"
 
 
-
-
 export const getAllRestaurantsAction=(token)=>{
     return async (dispatch)=>{
         dispatch({type:GET_ALL_RESTAURANTS_REQUEST});
@@ -14,7 +12,7 @@ export const getAllRestaurantsAction=(token)=>{
                 }
             })
             dispatch({type:GET_ALL_RESTAURANTS_SUCCESS,payload:data})
-            console.log("All restaurants",data);
+            console.log("From Restaurant State : All restaurants",data);
             
         } catch (error) {
 
@@ -34,6 +32,7 @@ export const getRestaurantById = (reqData) => {
           },
         });
         dispatch({type:GET_RESTAURANT_BY_ID_SUCCESS,payload:response.data});
+        console.log("From Restaurant State:Restaurant By ID->",response.data)
       } catch (error) {
         console.log('error', error);
         dispatch({type:GET_RESTAURANT_BY_ID_FAILURE,payload:error.data});
@@ -51,7 +50,7 @@ export const getRestaurantById = (reqData) => {
           },
         });
 
-        console.log("Getting restaurnants by user id"+data);
+        console.log("From Restaurant State :Restaurnants by user id"+data);
         dispatch({type:GET_RESTAURANT_BY_USER_ID_SUCCESS,payload:data});
 
         

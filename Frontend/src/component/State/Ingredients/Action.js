@@ -11,11 +11,11 @@ export const getIngredientsOfRestaurant = ({ id, jwt }) => {
         },
       });
 
-      console.log('get all ingredients', response.data);
+      console.log('From Ingredients Stae: All ingredients', response.data);
 
       dispatch({
         type: GET_INGREDIENTS,
-        payload: response.data, // Assuming the response contains the ingredients data
+        payload: response.data, 
       });
     } catch (error) {
       console.log('error', error);
@@ -106,7 +106,7 @@ export const updateStockOfIngredient = ({ id, jwt }) => {
       console.log('update ingredients stock ', data);
     } catch (error) {
       console.log('error', error);
-      // Handle error, dispatch an error action, etc.
+    
     }
   };
 };
