@@ -43,6 +43,12 @@ const LoginForm = () => {
             Register
         </Button>
       </Typography>
+      <Typography variant='body2' align='center' sx={{margin:3}}>
+        Forgot Password ?
+        <Button size='small' onClick={()=>navigate("account/reset")}>
+            Reset
+        </Button>
+      </Typography>
     </div>
   );
 };

@@ -18,7 +18,9 @@ import com.infosys.admin.Model.Order;
 import com.infosys.admin.Model.User;
 
 import com.infosys.admin.Request.OrderRequest;
+import com.infosys.admin.response.PaymentResponse;
 import com.infosys.admin.service.OrderService;
+import com.infosys.admin.service.PaymentService;
 import com.infosys.admin.service.UserService;
 
 @RestController
@@ -31,16 +33,22 @@ public class OrderController {
 	@Autowired
 	private UserService userService;
 	
+	
+	@Autowired
+	private PaymentService paymentservice;
+	
 
 	@PostMapping("/order")
-	public ResponseEntity<Order>createOrder(@RequestBody OrderRequest req,
+	public ResponseEntity<PaymentResponse>createOrder(@RequestBody OrderRequest req,
 			@RequestHeader("Authorization")String jwt
 			)throws Exception{
 		
 		User user=this.userService.findUserByJwtToken(jwt);
 		Order order=orderService.createOrder(req, user);
 		
-		return new ResponseEntity<>(order,HttpStatus.CREATED);
+		PaymentResponse res=paymentservice.createPaymentLink(order);
+		
+		return new ResponseEntity<>(res,HttpStatus.CREATED);
 		
 	}
 	@GetMapping("/order/user")

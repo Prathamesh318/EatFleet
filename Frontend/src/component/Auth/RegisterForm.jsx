@@ -35,7 +35,7 @@ const RegisterForm = () => {
         <Form>
           <Field
             as={TextField}
-            name="fullname"
+            name="fullName"
             label="Full Name"
             fullWidth
             variant="outlined"
@@ -84,7 +84,7 @@ const RegisterForm = () => {
             variant="contained"
             
           >
-            Regsiter
+            Register
           </Button>
         </Form>
       </Formik>

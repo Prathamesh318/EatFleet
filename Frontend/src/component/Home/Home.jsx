@@ -10,29 +10,33 @@ const Home = () => {
 
   const jwt = localStorage.getItem("jwt");
   const { restaurant } = useSelector(store => store);
+  
   function getjwt() {
-    console.log("JWT Token: " + jwt);
     return jwt;
   }
+
   useEffect(() => {
-
     dispatch(getAllRestaurantsAction(getjwt()));
-
   }, []);
 
   return (
     <div className="pb-10">
+      {/* Banner Section */}
       <section className="banner -z-50 relative flex flex-col justify-center items-center">
-        <div className="w-[50vw] z-10 text-center">
-          <p className="text-2xl lg:text-6xl font-bold z-10 py-5">Treatify</p>
-          <p className="text-xl z-10 text-gray-300 lg:text-4xl">
+        {/* Text Overlay with Background */}
+        <div className="relative z-10 text-center bg-black bg-opacity-50 p-8 rounded-lg">
+          <p className="text-4xl lg:text-6xl font-bold text-white drop-shadow-lg">EatFleet</p>
+          <p className="text-xl lg:text-3xl text-gray-300 mt-3 drop-shadow-lg">
             Taste the Convenience: Food, fast and Delivered
           </p>
         </div>
+
+        {/* Banner Image */}
         <div className="cover absolute top-0 left-0 right-0"></div>
         <div className="fadeout"></div>
       </section>
 
+      {/* Top Meals Section */}
       <section className="p-10 lg:py-10 lg:px-20">
         <p className="text-2xl font-semibold text-orange-400 py-3 pb-10 text-center">
           Top Meals
@@ -40,6 +44,7 @@ const Home = () => {
         <MultiItemCarousel />
       </section>
 
+      {/* Handpicked Favourites Section */}
       <section className="px-5 lg:px-20 pt-10">
         <h1 className="text-2xl font-semibold text-center text-orange-400 py-3 pb-8">
           Order From Our Handpicked Favourites

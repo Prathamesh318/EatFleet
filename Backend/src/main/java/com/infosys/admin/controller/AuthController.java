@@ -47,6 +47,7 @@ public class AuthController {
 	public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user){
 		
 		User isEmailExist=userRepo.findByEmail(user.getEmail());
+		System.out.println("User Name"+user.getFullName());
 		if(isEmailExist!=null) {
 			throw new BadCredentialsException("Email already exist with another account");
 		}

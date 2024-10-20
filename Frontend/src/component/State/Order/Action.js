@@ -10,9 +10,10 @@ export const createOrder = ({order,jwt}) => {
             Authorization: `Bearer ${jwt}`,
           },
         });
-        // if (data.payment_url) {
-        //   window.location.href = data.payment_url;
-        // }
+        console.log('Payment URL:', data.payment_url);
+        if (data.payment_url) {
+          window.location.href = data.payment_url;
+        }
         console.log('created order data', data);
         dispatch({type:CREATE_ORDER_SUCCESS,payload:data});
       } catch (error) {
